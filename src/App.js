@@ -1,6 +1,6 @@
 import "./App.css";
 import "./firebaseConfig";
-import { useState } from "react";
+import { useState, useRef } from "react";
 import { Grid, Input } from "@mui/material";
 import Button from "@mui/material/Button";
 import Stack from "@mui/material/Stack";
@@ -62,6 +62,21 @@ function App() {
   const [gradeSchoolStudied, setGradeSchoolStudied] = useState("");
   const [collegeStudied, setCollegeStudied] = useState("");
   const [postGradStudied, setPostGradStudied] = useState("");
+
+  const [rows, setRows] = useState([0, 1, 2, 3, 4]);
+  const inputRef = useRef(new Array());
+
+  const [numberOfPrevEmployment, setNumberOfPrevEmployment] = useState(7);
+  const [prevEmploymentFrom, setPrevEmploymentFrom] = useState([]);
+  const [prevEmploymentTo, setPrevEmploymentTo] = useState([]);
+  const [prevEmployerName, setPrevEmployerName] = useState([]);
+  const [prevJobPosition, setPrevJobPosition] = useState([]);
+  const [prevJobAddress, setPrevJobAddress] = useState([]);
+  const [prevJobLeavingReason, setPrevJobLeavingReason] = useState([]);
+  const [prevCompanyMobileNum, setPrevCompanyMobileNum] = useState([]);
+  const [prevCompanySubjectToFMCR, setPrevCompanySubjectToFMCR] = useState([]);
+  const [prevCompanyDOTRegulation, setPrevCompanyDOTRegulation] = useState([]);
+
   //util functions
   const jobPositionHandler = (event) => {
     setJobPosition(event.target.value);
@@ -92,6 +107,141 @@ function App() {
           console.error(err);
         });
     }
+  };
+
+  //component
+  const PrevEmployment = ({ index }) => {
+    return (
+      <>
+        <LocalizationProvider dateAdapter={AdapterDateFns}>
+          <DesktopDatePicker
+            label="From"
+            value={prevEmploymentFrom[index]}
+            views={["year", "month"]}
+            maxDate={new Date()}
+            onChange={(newValue) => {
+              var temp = [...prevEmploymentFrom];
+              temp[index] = newValue;
+              setPrevEmploymentFrom(temp);
+            }}
+            renderInput={(params) => <TextField {...params} />}
+          />
+        </LocalizationProvider>
+        <LocalizationProvider dateAdapter={AdapterDateFns}>
+          <DesktopDatePicker
+            label="To"
+            value={prevEmploymentTo[index]}
+            minDate={prevEmploymentFrom[index]}
+            views={["year", "month"]}
+            onChange={(newValue) => {
+              var temp = [...prevEmploymentTo];
+              temp[index] = newValue;
+              setPrevEmploymentTo(temp);
+            }}
+            renderInput={(params) => <TextField {...params} />}
+          />
+        </LocalizationProvider>
+        <TextField
+          id="outlined-required"
+          label="Present or Last Employer Name"
+          value={prevEmployerName[index]}
+          onChange={(event) => {
+            var temp = [...prevEmployerName];
+            temp[index] = event.target.value;
+            setPrevEmployerName(temp);
+          }}
+        />
+        <TextField
+          id="outlined-required"
+          label="Position Held"
+          value={prevJobPosition[index]}
+          onChange={(event) => {
+            var temp = [...prevJobPosition];
+            temp[index] = event.target.value;
+            setPrevJobPosition(temp);
+          }}
+        />
+        <TextField
+          id="outlined-required"
+          label="ADDRESS"
+          value={prevJobAddress[index]}
+          onChange={(event) => {
+            var temp = [...prevJobAddress];
+            temp[index] = event.target.value;
+            setPrevJobAddress(temp);
+          }}
+        />
+        <TextField
+          multiline
+          rows={4}
+          id="outlined-required"
+          label="Reason for leaving"
+          value={prevJobLeavingReason[index]}
+          onChange={(event) => {
+            var temp = [...prevJobLeavingReason];
+            temp[index] = event.target.value;
+            setPrevJobLeavingReason(temp);
+          }}
+        />
+        <MuiPhoneNumber
+          name="phone"
+          label="Company phone"
+          data-cy="user-phone"
+          defaultCountry={"us"}
+          value={prevCompanyMobileNum[index]}
+          onChange={(event) => {
+            var temp = [...prevCompanyMobileNum];
+            temp[index] = event.target.value;
+            setPrevCompanyMobileNum(temp);
+          }}
+        />
+        <FormControl component="fieldset" required>
+          <FormLabel component="legend">
+            Were you subject to the FMCSRs while employed here?
+          </FormLabel>
+          <RadioGroup
+            row
+            name="row-radio-buttons-group"
+            onChange={(event) => {
+              var temp = [...prevCompanySubjectToFMCR];
+              temp[index] = event.target.value;
+              setPrevCompanySubjectToFMCR(temp);
+            }}
+          >
+            <FormControlLabel value="Yes" control={<Radio />} label="Yes" />
+            <FormControlLabel value="No" control={<Radio />} label="No" />
+          </RadioGroup>
+        </FormControl>
+        <FormControl component="fieldset" required>
+          <FormLabel component="legend">
+            Was your job designated as a safety-sensitive function in any DOT-
+            regulated mode subject to the drug and alcohol testing requirements
+            of 49 CFR Part 40?
+          </FormLabel>
+          <RadioGroup
+            row
+            name="row-radio-buttons-group"
+            onChange={(event) => {
+              var temp = [...prevCompanyDOTRegulation];
+              temp[index] = event.target.value;
+              setPrevCompanyDOTRegulation(temp);
+            }}
+          >
+            <FormControlLabel value="Yes" control={<Radio />} label="Yes" />
+            <FormControlLabel value="No" control={<Radio />} label="No" />
+          </RadioGroup>
+        </FormControl>
+      </>
+    );
+  };
+  const EmploymentHistory = () => {
+    return (
+      <>
+        {rows.map((_, i) => {
+          return <PrevEmployment index={i} key={i} />;
+        })}
+      </>
+    );
   };
 
   //rendering
@@ -131,16 +281,20 @@ function App() {
           <MenuItem value="Contractor’s Driver">Contractor’s Driver </MenuItem>
         </TextField>
         <TextField
+          inputRef={element => inputRef.current[0]=element}
+        //  inputRef={inputRef}
           required
           id="outlined-required"
           label="NAME"
-          value={applicantName}
+          //value={applicantName}
           onChange={(event) => {
-            setApplicantName(event.target.value);
+           // setApplicantName(event.target.value);
+            console.log(inputRef.current[0].value)
           }}
         />
 
         <MuiPhoneNumber
+          required
           name="phone"
           label="PHONE NUMBER"
           data-cy="user-phone"
@@ -156,9 +310,11 @@ function App() {
           type="number"
           id="outlined-required"
           label="AGE"
-          value={age}
+          inputRef={element => inputRef.current[1]=element}
+          //value={age}
           onChange={(event) => {
-            setAge(event.target.value);
+          //  setAge(event.target.value);
+          console.log(inputRef.current[1].value)
           }}
         />
         <LocalizationProvider dateAdapter={AdapterDateFns}>
@@ -197,7 +353,7 @@ function App() {
         <TextField
           required
           id="outlined-required"
-          label=""
+          label="ADDRESS"
           value={firstAddress}
           onChange={(event) => {
             setFirstAddress(event.target.value);
@@ -228,7 +384,7 @@ function App() {
         <TextField
           required
           id="outlined-required"
-          label=""
+          label="ADDRESS"
           value={secondAddress}
           onChange={(event) => {
             setSecondAddress(event.target.value);
@@ -259,7 +415,7 @@ function App() {
         <TextField
           required
           id="outlined-required"
-          label=""
+          label="ADDRESS"
           value={thirdAddress}
           onChange={(event) => {
             setThirdAddress(event.target.value);
@@ -397,50 +553,12 @@ function App() {
         </FormControl>
 
         <h2>EMPLOYMENT HISTORY:</h2>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+        <p>
+          Give a COMPLETE RECORD of all employment for the past three (3) years,
+          including any unemployment or self employment periods, and all
+          commercial driving experience for the past ten (10) years
+        </p>
+        <EmploymentHistory />
         {/*  */}
         {/* <label htmlFor="file-upload" className="custom-file-upload">
             <FontAwesomeIcon icon={faUpload} color="white" />
