@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useContext,useEffect } from "react";
 import MuiPhoneNumber from "material-ui-phone-number";
 import DesktopDatePicker from "@mui/lab/DesktopDatePicker";
 import AdapterDateFns from "@mui/lab/AdapterDateFns";
@@ -9,8 +9,7 @@ import FormControlLabel from "@mui/material/FormControlLabel";
 import FormControl from "@mui/material/FormControl";
 import FormLabel from "@mui/material/FormLabel";
 import { TextField, MenuItem } from "@mui/material";
-
-
+import { PrevEmploymentContext } from "../context/PrevEmploymentContext";
 
 const PrevEmployment = ({
   index,
@@ -19,9 +18,13 @@ const PrevEmployment = ({
   prevEmploymentTo,
   setPrevEmploymentTo,
   prevEmployerName,
+  setPrevEmployerName,
   prevJobPosition,
+  setPrevJobPosition,
   prevJobAddress,
+  setPrevJobAddress,
   prevJobLeavingReason,
+  setPrevJobLeavingReason,
   prevCompanyMobileNum,
   setPrevCompanyMobileNum,
   prevCompanySubjectToFMCR,
@@ -29,15 +32,60 @@ const PrevEmployment = ({
   prevCompanyDOTRegulation,
   setPrevCompanyDOTRegulation,
 }) => {
+  const [state, dispatch] = useContext(PrevEmploymentContext);
+  const changeHandler = () => {
+    dispatch({
+      type: "ADD_OBJECT_DATA",
+      payload: {
+        prevEmploymentFrom,
+
+        prevEmploymentTo,
+
+        prevEmployerName,
+
+        prevJobPosition,
+
+        prevJobAddress,
+
+        prevJobLeavingReason,
+
+        prevCompanyMobileNum,
+
+        prevCompanySubjectToFMCR,
+
+        prevCompanyDOTRegulation,
+      },
+    });
+  };
+
+  useEffect(() => {
+    changeHandler();
+  }, [
+    prevEmploymentFrom,
+
+    prevEmploymentTo,
+
+    prevEmployerName,
+
+    prevJobPosition,
+
+    prevJobAddress,
+
+    prevJobLeavingReason,
+
+    prevCompanyMobileNum,
+
+    prevCompanySubjectToFMCR,
+
+    prevCompanyDOTRegulation,
+  ]);
+
   return (
     <div>
       <LocalizationProvider dateAdapter={AdapterDateFns}>
         <DesktopDatePicker
           label="From"
           value={prevEmploymentFrom[index]}
-          // value={prevEmploymentFrom.current[index].value}
-
-          // inputRef={prevEmploymentFrom.current[index]}
           views={["year", "month"]}
           maxDate={new Date()}
           onChange={(newValue) => {
@@ -46,7 +94,6 @@ const PrevEmployment = ({
             var temp = [...prevEmploymentFrom];
             temp[index] = newValue;
             setPrevEmploymentFrom(temp);
-            // prevEmploymentFrom.current[index].value = newValue;
           }}
           renderInput={(params) => <TextField {...params} />}
         />
@@ -70,49 +117,47 @@ const PrevEmployment = ({
       <TextField
         id="outlined-required"
         label="Present or Last Employer Name"
-        //value={prevEmployerName[index]}
-        inputRef={(element) => (prevEmployerName.current[index] = element)}
-        // onChange={(event) => {
-
-        //   //   var temp = [...prevEmployerName];
-        //   //   temp[index] = event.target.value;
-        //   //   setPrevEmployerName(temp);
-        // }}
+        //inputRef={(element) => (prevEmployerName.current[index] = element)}
+        onChange={(event) => {
+          var temp = [...prevEmployerName];
+          temp[index] = event.target.value;
+          setPrevEmployerName(temp);
+        }}
       />
       <TextField
         id="outlined-required"
         label="Position Held"
-        inputRef={(element) => (prevJobPosition.current[index] = element)}
-        // value={prevJobPosition[index]}
-        // onChange={(event) => {
-        //   var temp = [...prevJobPosition];
-        //   temp[index] = event.target.value;
-        //   setPrevJobPosition(temp);
-        // }}
+        //inputRef={(element) => (prevJobPosition.current[index] = element)}
+
+        onChange={(event) => {
+          var temp = [...prevJobPosition];
+          temp[index] = event.target.value;
+          setPrevJobPosition(temp);
+        }}
       />
       <TextField
         id="outlined-required"
         label="ADDRESS"
-        inputRef={(element) => (prevJobAddress.current[index] = element)}
-        // value={prevJobAddress[index]}
-        // onChange={(event) => {
-        //   var temp = [...prevJobAddress];
-        //   temp[index] = event.target.value;
-        //   setPrevJobAddress(temp);
-        // }}
+        //inputRef={(element) => (prevJobAddress.current[index] = element)}
+
+        onChange={(event) => {
+          var temp = [...prevJobAddress];
+          temp[index] = event.target.value;
+          setPrevJobAddress(temp);
+        }}
       />
       <TextField
         multiline
         rows={4}
         id="outlined-required"
         label="Reason for leaving"
-        inputRef={(element) => (prevJobLeavingReason.current[index] = element)}
-        // value={prevJobLeavingReason[index]}
-        // onChange={(event) => {
-        //   var temp = [...prevJobLeavingReason];
-        //   temp[index] = event.target.value;
-        //   setPrevJobLeavingReason(temp);
-        // }}
+        //inputRef={(element) => (prevJobLeavingReason.current[index] = element)}
+
+        onChange={(event) => {
+          var temp = [...prevJobLeavingReason];
+          temp[index] = event.target.value;
+          setPrevJobLeavingReason(temp);
+        }}
       />
       <MuiPhoneNumber
         name="phone"
@@ -120,7 +165,6 @@ const PrevEmployment = ({
         data-cy="user-phone"
         defaultCountry={"us"}
         value={prevCompanyMobileNum[index]}
-        // inputRef={(element) => (number.current[index] = element)}
         onChange={(event) => {
           console.log(event);
           const temp = [...prevCompanyMobileNum];
@@ -136,9 +180,6 @@ const PrevEmployment = ({
         <RadioGroup
           row
           name="row-radio-buttons-group"
-          // inputRef={(element) =>
-          //   (prevCompanySubjectToFMCR.current[index] = element)
-          // }
           value={prevCompanySubjectToFMCR[index]}
           onChange={(event) => {
             //  console.log(prevCompanySubjectToFMCR.current[index])

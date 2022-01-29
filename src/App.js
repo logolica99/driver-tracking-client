@@ -20,6 +20,9 @@ import LocalizationProvider from "@mui/lab/LocalizationProvider";
 
 //component import
 import EmploymentHistory from "./components/EmploymentHistory";
+import PrevEmployment from "./components/PrevEmployment";
+import DriverExperience from "./components/DriverExperience";
+
 //firebase import
 
 import { getStorage, uploadBytes, ref } from "firebase/storage";
@@ -66,27 +69,28 @@ function App() {
   const [collegeStudied, setCollegeStudied] = useState("");
   const [postGradStudied, setPostGradStudied] = useState("");
 
-  const [rows, setRows] = useState([0, 1, 2, 3, 4]);
+  const [numberOfPrevEmployment, setNumberOfPrevEmployment] = useState([0]);
+  const [prevEmploymentFrom, setPrevEmploymentFrom] = useState([""]);
 
-  const [numberOfPrevEmployment, setNumberOfPrevEmployment] = useState(7);
-  const [prevEmploymentFrom, setPrevEmploymentFrom] = useState([]);
+  const [prevEmploymentTo, setPrevEmploymentTo] = useState([""]);
 
-  //const prevEmploymentFrom = useRef(new Array());
-  const [prevEmploymentTo, setPrevEmploymentTo] = useState([]);
-  //const prevEmploymentTo = useRef(new Array());
-  //const [prevEmployerName, setPrevEmployerName] = useState([]);
-  const prevEmployerName = useRef(new Array());
-  // const [prevJobPosition, setPrevJobPosition] = useState([]);
-  const prevJobPosition = useRef(new Array());
-  //const [prevJobAddress, setPrevJobAddress] = useState([]);
-  const prevJobAddress = useRef(new Array());
-  //const [prevJobLeavingReason, setPrevJobLeavingReason] = useState([]);
-  const prevJobLeavingReason = useRef(new Array());
-  const [prevCompanyMobileNum, setPrevCompanyMobileNum] = useState([]);
+  const [prevEmployerName, setPrevEmployerName] = useState([""]);
+  // const prevEmployerName = useRef(new Array());
+  const [prevJobPosition, setPrevJobPosition] = useState([""]);
+  // const prevJobPosition = useRef(new Array());
+  const [prevJobAddress, setPrevJobAddress] = useState([""]);
+  // const prevJobAddress = useRef(new Array());
+  const [prevJobLeavingReason, setPrevJobLeavingReason] = useState([""]);
+  // const prevJobLeavingReason = useRef(new Array());
+  const [prevCompanyMobileNum, setPrevCompanyMobileNum] = useState([""]);
 
-  const [prevCompanySubjectToFMCR, setPrevCompanySubjectToFMCR] = useState([]);
+  const [prevCompanySubjectToFMCR, setPrevCompanySubjectToFMCR] = useState([
+    "",
+  ]);
 
-  const [prevCompanyDOTRegulation, setPrevCompanyDOTRegulation] = useState([]);
+  const [prevCompanyDOTRegulation, setPrevCompanyDOTRegulation] = useState([
+    "",
+  ]);
 
   //util functions
   const jobPositionHandler = (event) => {
@@ -437,15 +441,19 @@ function App() {
           commercial driving experience for the past ten (10) years
         </p>
         <EmploymentHistory
-          rows={rows}
+          numberOfPrevEmployment={numberOfPrevEmployment}
           prevEmploymentFrom={prevEmploymentFrom}
           setPrevEmploymentFrom={setPrevEmploymentFrom}
           prevEmploymentTo={prevEmploymentTo}
           setPrevEmploymentTo={setPrevEmploymentTo}
           prevEmployerName={prevEmployerName}
+          setPrevEmployerName={setPrevEmployerName}
           prevJobPosition={prevJobPosition}
+          setPrevJobPosition={setPrevJobPosition}
           prevJobAddress={prevJobAddress}
+          setPrevJobAddress={setPrevJobAddress}
           prevJobLeavingReason={prevJobLeavingReason}
+          setPrevJobLeavingReason={setPrevJobLeavingReason}
           prevCompanyMobileNum={prevCompanyMobileNum}
           setPrevCompanyMobileNum={setPrevCompanyMobileNum}
           prevCompanySubjectToFMCR={prevCompanySubjectToFMCR}
@@ -453,7 +461,18 @@ function App() {
           prevCompanyDOTRegulation={prevCompanyDOTRegulation}
           setPrevCompanyDOTRegulation={setPrevCompanyDOTRegulation}
         />
-        {/*  */}
+      
+        {/* <Button >Add Field</Button> */}
+        <button
+          onClick={(e) => {
+            e.preventDefault();
+            setNumberOfPrevEmployment((prev) => [...prev, 0]);
+          }}
+        >
+          Add Field
+        </button>
+
+        <DriverExperience />
         {/* <label htmlFor="file-upload" className="custom-file-upload">
             <FontAwesomeIcon icon={faUpload} color="white" />
             <p className="file-upload-button">Upload File</p>
@@ -489,4 +508,3 @@ function App() {
 }
 
 export default App;
-
