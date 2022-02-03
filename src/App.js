@@ -168,7 +168,7 @@ function App() {
           required
           id="outlined-required"
           label="NAME"
-          value={applicantName}
+ 
           onChange={(event) => {
             setApplicantName(event.target.value);
             // console.log(inputRef.current[0].value)

@@ -13,7 +13,7 @@ const initialState = {
   listOfSpecialTraining: [],
   listOfDrivingAwards: [],
   numberOfAccidents: 1,
-  accidentRecords: [],
+  accidentRecords: {},
   trafficConvictionRecords: [],
   driverLicenseList: [],
   denialOfLicence: false,
