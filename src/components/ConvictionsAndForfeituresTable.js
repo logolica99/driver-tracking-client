@@ -32,14 +32,14 @@ const rows = [
   { name: "Tractor & triple trailers", field: "tractorAndTripleTrailers" },
 ];
 
-export default function AccidentTable() {
+export default function ConvictionsAndForfeituresTable() {
   const [state, dispatch] = useContext(DriverExperienceContext);
-  const [accidentDates, setAccidentDates] = useState([]);
-  const [natureOfAccidents, setNatureOfAccidents] = useState([]);
-  const [locationOfAccidents, setLocationOfAccidents] = useState([]);
-  const [numberOfFatalities, setNumberOfFatalities] = useState([]);
-  const [numberOfPeopleInjured, setNumberOfPeopleInjured] = useState([]);
-  const [numberOfAccident, setNumberOfAccident] = useState([0]);
+  const [dates, setDates] = useState([]);
+
+  const [locations, setLocations] = useState([]);
+  const [charges, setCharges] = useState([]);
+  const [penalties, setPenalties] = useState([]);
+  const [numberOfFields, setNumberOfFields] = useState([0]);
 
   const changeHandler = (fieldName, data) => {
     dispatch({
@@ -50,66 +50,44 @@ export default function AccidentTable() {
       },
     });
   };
-  useEffect(() => {
-    changeHandler("numberOfAccidents", numberOfAccident.length);
-  }, [numberOfAccident]);
 
   useEffect(() => {
-    changeHandler("accidentRecords", {
-      accidentDates: accidentDates,
-      natureOfAccidents: natureOfAccidents,
-      locationOfAccidents: locationOfAccidents,
-      numberOfFatalities: numberOfFatalities,
-      numberOfPeopleInjured: numberOfPeopleInjured,
+    changeHandler("trafficConvictionRecords", {
+      dates: dates,
+      locations: locations,
+      charges: charges,
+      penalites: penalties,
     });
-  }, [
-    accidentDates,
-    natureOfAccidents,
-    locationOfAccidents,
-    numberOfFatalities,
-    numberOfPeopleInjured,
-  ]);
+  }, [dates, locations, charges, penalties, numberOfFields]);
 
   return (
     <div className="drivingExperience-bigItem">
       <p style={{ fontWeight: "bold" }}>
-        Accident Record for past three (3) years:{" "}
+        Traffic Convictions and Forfeitures for the last three (3) years:
       </p>
       <TableContainer component={Paper}>
         <Table sx={{ minWidth: 700 }} aria-label="simple table">
           <TableHead>
             <TableRow>
-              <StyledTableCell align="center">
-                Date of Accident{" "}
-              </StyledTableCell>
-              <TableCell align="center">
-                Nature of Accidents
-                <span style={{ display: "block" }}>
-                  (Head on, rear end, etc)
-                </span>
-              </TableCell>
-              <StyledTableCell align="center">
-                Location of Accident
-              </StyledTableCell>
-              <TableCell align="center"># of Fatalities</TableCell>
-              <StyledTableCell align="center">
-                # of People Injured
-              </StyledTableCell>
+              <StyledTableCell align="center">Date</StyledTableCell>
+              <TableCell align="center">Location</TableCell>
+              <StyledTableCell align="center">Charge</StyledTableCell>
+              <TableCell align="center">Penalty</TableCell>
             </TableRow>
           </TableHead>
           <TableBody>
-            {numberOfAccident.map((value, index) => (
+            {numberOfFields.map((value, index) => (
               <TableRow key={index}>
                 <TableCell>
                   <LocalizationProvider dateAdapter={AdapterDateFns}>
                     <DesktopDatePicker
                       label="Date"
-                      value={accidentDates[index]}
+                      value={dates[index]}
                       maxDate={new Date().getTime()}
                       onChange={(newValue) => {
-                        var temp = [...accidentDates];
+                        var temp = [...dates];
                         temp[index] = newValue.getTime();
-                        setAccidentDates(temp);
+                        setDates(temp);
                       }}
                       renderInput={(params) => <TextField {...params} />}
                     />
@@ -117,47 +95,35 @@ export default function AccidentTable() {
                 </TableCell>
                 <TableCell>
                   <TextField
-                    label="Nature Of Accidents"
-                    onBlur={(event) => {
-                      var temp = [...natureOfAccidents];
-                      temp[index] = event.target.value;
-                      setNatureOfAccidents(temp);
-                    }}
-                  />
-                </TableCell>
-                <TableCell>
-                  <TextField
                     label="Location"
-                    onBlur={(e) => {
-                      var temp = [...locationOfAccidents];
-                      temp[index] = e.target.value;
-                      setLocationOfAccidents(temp);
+                    onBlur={(event) => {
+                      var temp = [...locations];
+                      temp[index] = event.target.value;
+                      setLocations(temp);
                     }}
                   />
                 </TableCell>
                 <TableCell>
                   <TextField
-                    label="No. Of Fatalities"
-                    type="number"
+                    label="Charge"
                     onBlur={(e) => {
-                      var temp = [...numberOfFatalities];
+                      var temp = [...charges];
                       temp[index] = e.target.value;
-                      setNumberOfFatalities(temp);
+                      setCharges(temp);
                     }}
                   />
                 </TableCell>
                 <TableCell>
                   <TextField
-                    label="No. Of Injured"
+                    label="Penalty"
                     type="number"
                     onBlur={(e) => {
-                      var temp = [...numberOfPeopleInjured];
+                      var temp = [...penalties];
                       temp[index] = e.target.value;
-                      setNumberOfPeopleInjured(temp);
+                      setPenalties(temp);
                     }}
                   />
                 </TableCell>
-                <TableCell></TableCell>
               </TableRow>
             ))}
           </TableBody>
@@ -165,11 +131,10 @@ export default function AccidentTable() {
       </TableContainer>
       <div className="drivingExperience-item">
 
-
       <Button
         variant="contained"
         onClick={() => {
-          setNumberOfAccident((prevData) => [...prevData, 0]);
+          setNumberOfFields((prevData) => [...prevData, 0]);
         }}
       >
         Add More Field

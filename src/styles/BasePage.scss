@@ -1,0 +1,100 @@
+body {
+  background-color: #f6ede8;
+}
+.App {
+  width: 80%;
+  padding: 0px 80px;
+  background-color: white;
+  border-radius: 20px;
+  margin: auto;
+  margin-top: 100px;
+  margin-bottom: 100px;
+  display: flex;
+  justify-content: center;
+  padding-bottom: 30px;
+  box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+  @media (max-width: 100px) {
+    padding: 0px 30px;
+    padding-bottom: 30px;
+  }
+  &-title {
+    > h1 {
+        margin-top: 50px;
+      margin-bottom: 60px;
+      text-align: center;
+    }
+  }
+}
+
+.Auth {
+  &-title {
+    font-weight: bold;
+  }
+  &-item {
+    display: flex;
+    flex-direction: column;
+  }
+}
+body {
+}
+
+.applicantInfo {
+  &-title {
+    margin: 40px 0px;
+  }
+  &-item {
+    margin: 16px 0px;
+
+    &-vertical {
+      margin: 30px 0px;
+      display: flex;
+    }
+    &-horizontal {
+      margin-left: 20px;
+    }
+  }
+}
+
+.employmentHistory {
+  &-title {
+  
+  }
+  &-item {
+    margin: 16px 0px;
+
+    &-vertical {
+      margin: 30px 0px;
+      display: flex;
+    }
+    &-horizontal {
+      margin-left: 20px;
+    }
+  }
+}
+.drivingExperience {
+  &-title{
+      margin:60px 0px;
+  }
+  &-bigItem{
+      margin: 40px 0px;
+  }
+  &-item {
+    margin: 30px 0px;
+
+    &-vertical {
+      margin: 30px 0px;
+      display: flex;
+    }
+    &-horizontal {
+      margin-left: 20px;
+    }
+  }
+
+
+
+}
+
+.submitButton{
+    display: flex;
+    justify-content: right;
+}

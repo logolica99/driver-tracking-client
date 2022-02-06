@@ -3,16 +3,22 @@ import ReactDOM from "react-dom";
 import "./index.css";
 import App from "./App";
 import reportWebVitals from "./reportWebVitals";
+import { AuthContextProvider } from "./context/AuthContext";
+import { ApplicantInformationContextProvider } from "./context/ApplicantInformationContext";
 import { DriverExperienceContextProvider } from "./context/DriverExperienceContext";
 import { PrevEmploymentContextProvider } from "./context/PrevEmploymentContext";
 
 ReactDOM.render(
   <React.StrictMode>
-    <PrevEmploymentContextProvider>
-      <DriverExperienceContextProvider>
-        <App />
-      </DriverExperienceContextProvider>
-    </PrevEmploymentContextProvider>
+    <AuthContextProvider>
+      <ApplicantInformationContextProvider>
+        <PrevEmploymentContextProvider>
+          <DriverExperienceContextProvider>
+            <App />
+          </DriverExperienceContextProvider>
+        </PrevEmploymentContextProvider>
+      </ApplicantInformationContextProvider>
+    </AuthContextProvider>
   </React.StrictMode>,
   document.getElementById("root")
 );

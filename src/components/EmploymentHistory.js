@@ -1,26 +1,9 @@
 import React, { useState } from "react";
+import { Button } from "@mui/material";
 import PrevEmployment from "./PrevEmployment";
 
-const EmploymentHistory = ({ numberOfPrevEmployment }) => {
-  // prevEmploymentFrom,
-  // setPrevEmploymentFrom,
-  // prevEmploymentTo,
-  // setPrevEmploymentTo,
-  // prevEmployerName,
-  // setPrevEmployerName,
-  // prevJobPosition,
-  // setPrevJobPosition,
-  // prevJobAddress,
-  // setPrevJobAddress,
-  // prevJobLeavingReason,
-  // setPrevJobLeavingReason,
-  // prevCompanyMobileNum,
-  // setPrevCompanyMobileNum,
-  // prevCompanySubjectToFMCR,
-  // setPrevCompanySubjectToFMCR,
-  // prevCompanyDOTRegulation,
-  // setPrevCompanyDOTRegulation,
-
+const EmploymentHistory = ({}) => {
+  const [numberOfPrevEmployment, setNumberOfPrevEmployment] = useState([0]);
   const [prevEmploymentFrom, setPrevEmploymentFrom] = useState([""]);
 
   const [prevEmploymentTo, setPrevEmploymentTo] = useState([""]);
@@ -42,37 +25,54 @@ const EmploymentHistory = ({ numberOfPrevEmployment }) => {
   const [prevCompanyDOTRegulation, setPrevCompanyDOTRegulation] = useState([
     "",
   ]);
-  // const index = 0;
-  // const [numberOfPrevEmployment, setNumberOfPrevEmployment] = useState([0]);
 
   return (
     <>
+      <h2 className="employmentHistory-title">EMPLOYMENT HISTORY</h2>
+      <p>
+        Give a COMPLETE RECORD of all employment for the past three (3) years,
+        including any unemployment or self employment periods, and all
+        commercial driving experience for the past ten (10) years
+      </p>
       {numberOfPrevEmployment.map((_, index) => {
         return (
-          <PrevEmployment
-            key={index}
-            index={index}
-            prevEmploymentFrom={prevEmploymentFrom}
-            setPrevEmploymentFrom={setPrevEmploymentFrom}
-            prevEmploymentTo={prevEmploymentTo}
-            setPrevEmploymentTo={setPrevEmploymentTo}
-            prevEmployerName={prevEmployerName}
-            setPrevEmployerName={setPrevEmployerName}
-            prevJobPosition={prevJobPosition}
-            setPrevJobPosition={setPrevJobPosition}
-            prevJobAddress={prevJobAddress}
-            setPrevJobAddress={setPrevJobAddress}
-            prevJobLeavingReason={prevJobLeavingReason}
-            setPrevJobLeavingReason={setPrevJobLeavingReason}
-            prevCompanyMobileNum={prevCompanyMobileNum}
-            setPrevCompanyMobileNum={setPrevCompanyMobileNum}
-            prevCompanySubjectToFMCR={prevCompanySubjectToFMCR}
-            setPrevCompanySubjectToFMCR={setPrevCompanySubjectToFMCR}
-            prevCompanyDOTRegulation={prevCompanyDOTRegulation}
-            setPrevCompanyDOTRegulation={setPrevCompanyDOTRegulation}
-          />
+          <div className="employmentHistory-item" key={index}>
+            <PrevEmployment
+              key={index}
+              index={index}
+              prevEmploymentFrom={prevEmploymentFrom}
+              setPrevEmploymentFrom={setPrevEmploymentFrom}
+              prevEmploymentTo={prevEmploymentTo}
+              setPrevEmploymentTo={setPrevEmploymentTo}
+              prevEmployerName={prevEmployerName}
+              setPrevEmployerName={setPrevEmployerName}
+              prevJobPosition={prevJobPosition}
+              setPrevJobPosition={setPrevJobPosition}
+              prevJobAddress={prevJobAddress}
+              setPrevJobAddress={setPrevJobAddress}
+              prevJobLeavingReason={prevJobLeavingReason}
+              setPrevJobLeavingReason={setPrevJobLeavingReason}
+              prevCompanyMobileNum={prevCompanyMobileNum}
+              setPrevCompanyMobileNum={setPrevCompanyMobileNum}
+              prevCompanySubjectToFMCR={prevCompanySubjectToFMCR}
+              setPrevCompanySubjectToFMCR={setPrevCompanySubjectToFMCR}
+              prevCompanyDOTRegulation={prevCompanyDOTRegulation}
+              setPrevCompanyDOTRegulation={setPrevCompanyDOTRegulation}
+            />
+          </div>
         );
       })}
+      <div className="employmentHistory-item">
+        <Button
+          variant="contained"
+          onClick={(e) => {
+            e.preventDefault();
+            setNumberOfPrevEmployment((prev) => [...prev, 0]);
+          }}
+        >
+          Add Field
+        </Button>
+      </div>
     </>
   );
 };

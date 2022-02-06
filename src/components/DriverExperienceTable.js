@@ -36,29 +36,29 @@ export default function DriverExperienceTable() {
   const [state, dispatch] = useContext(DriverExperienceContext);
   const [dates, setDates] = useState({
     straightTruck: {
-      from: new Date(),
-      to: new Date(),
+      from: new Date().getTime(),
+      to: new Date().getTime(),
       approximateNoOfMiles: 0,
     },
     tractorAndSemitrailers: {
-      from: new Date(),
-      to: new Date(),
+      from: new Date().getTime(),
+      to: new Date().getTime(),
       approximateNoOfMiles: 0,
     },
     tractorAndTwoTrailers: {
-      from: new Date(),
-      to: new Date(),
+      from: new Date().getTime(),
+      to: new Date().getTime(),
       approximateNoOfMiles: 0,
     },
     tractorAndTripleTrailers: {
-      from: new Date(),
-      to: new Date(),
+      from: new Date().getTime(),
+      to: new Date().getTime(),
       approximateNoOfMiles: 0,
     },
   });
   const [states, setStates] = useState("");
-  const [specialTraining,setSpecialTraining] = useState("");
-  const [awards,setAwards] = useState("")
+  const [specialTraining, setSpecialTraining] = useState("");
+  const [awards, setAwards] = useState("");
   useEffect(() => {
     changeHandler("classOfEquipment", dates);
   }, [dates]);
@@ -74,6 +74,10 @@ export default function DriverExperienceTable() {
 
   return (
     <div>
+      <div className="drivingExperience-title">
+        <h2>Driving Experience</h2>
+      </div>
+
       <TableContainer component={Paper}>
         <Table sx={{ minWidth: 700 }} aria-label="simple table">
           <TableHead>
@@ -98,13 +102,13 @@ export default function DriverExperienceTable() {
                     <DesktopDatePicker
                       label="From"
                       value={dates[row.field].from}
-                      maxDate={new Date()}
+                      maxDate={new Date().getTime()}
                       onChange={(newValue) => {
                         setDates((prevData) => ({
                           ...prevData,
                           [row.field]: {
                             ...prevData[row.field],
-                            from: newValue,
+                            from: newValue.getTime(),
                           },
                         }));
                       }}
@@ -119,11 +123,14 @@ export default function DriverExperienceTable() {
                       label="From"
                       value={dates[row.field].to}
                       minDate={dates[row.field].from}
-                      maxDate={new Date()}
+                      maxDate={new Date().getTime()}
                       onChange={(newValue) => {
                         setDates((prevData) => ({
                           ...prevData,
-                          [row.field]: { ...prevData[row.field], to: newValue },
+                          [row.field]: {
+                            ...prevData[row.field],
+                            to: newValue.getTime(),
+                          },
                         }));
                       }}
                       renderInput={(params) => <TextField {...params} />}
@@ -134,8 +141,7 @@ export default function DriverExperienceTable() {
                 <TableCell align="center">
                   <TextField
                     type="number"
-                    value={dates[row.field].approximateNoOfMiles}
-                    onChange={(event) => {
+                    onBlur={(event) => {
                       setDates((prevData) => ({
                         ...prevData,
                         [row.field]: {
@@ -151,58 +157,60 @@ export default function DriverExperienceTable() {
           </TableBody>
         </Table>
       </TableContainer>
-      <p>
-        List of states operated (Provide state names seperated by a comma. i.e
-        (Cailfornia,Alabama,New Jersey)):
-      </p>
-      <TextField
-        fullWidth
-        value={states}
-        onChange={({ target: { value } }) => {
-          var values = value.split(",").map(function (item) {
-            return item.trim();
-          });
+      <div className="drivingExperience-item">
+        <p>
+          List of states operated (Provide state names seperated by a comma. i.e
+          (Cailfornia,Alabama,New Jersey)):
+        </p>
+        <TextField
+          fullWidth
+          onBlur={({ target: { value } }) => {
+            var values = value.split(",").map(function (item) {
+              return item.trim();
+            });
 
-          changeHandler("listOfStateOperated", values);
-          setStates(value);
-          if (/^[A-z A-z,.*]+$/.test(value)) {
-          }
-        }}
-      />
-     
-      <p>List special courses/training completed (PTD/DDC, HAZMAT, ETC):</p>
-      <TextField
-        fullWidth
-        value={specialTraining}
-        onChange={({ target: { value } }) => {
-          var values = value.split(",").map(function (item) {
-            return item.trim();
-          });
+            changeHandler("listOfStateOperated", values);
+            setStates(value);
+            if (/^[A-z A-z,.*]+$/.test(value)) {
+            }
+          }}
+        />
+      </div>
+      <div className="drivingExperience-item">
+        <p>List special courses/training completed (PTD/DDC, HAZMAT, ETC):</p>
+        <TextField
+          fullWidth
+          onBlur={({ target: { value } }) => {
+            var values = value.split(",").map(function (item) {
+              return item.trim();
+            });
 
-          changeHandler("listOfSpecialTraining", values);
-          setSpecialTraining(value);
-          if (/^[A-z A-z,.*]+$/.test(value)) {
-          }
-        }}
-      />
-      <p>
-        List any Safe Driving Awards you hold and from whom ie. (Expert Driver
-        Award(United States Postal Service)):
-      </p>
-      <TextField
-        fullWidth
-        value={awards}
-        onChange={({ target: { value } }) => {
-          var values = value.split(",").map(function (item) {
-            return item.trim();
-          });
+            changeHandler("listOfSpecialTraining", values);
+            setSpecialTraining(value);
+            if (/^[A-z A-z,.*]+$/.test(value)) {
+            }
+          }}
+        />
+      </div>
+      <div className="drivingExperience-item">
+        <p>
+          List any Safe Driving Awards you hold and from whom ie. (Expert Driver
+          Award(United States Postal Service)):
+        </p>
+        <TextField
+          fullWidth
+          onBlur={({ target: { value } }) => {
+            var values = value.split(",").map(function (item) {
+              return item.trim();
+            });
 
-          changeHandler("listOfDrivingAwards", values);
-          setAwards(value);
-          if (/^[A-z A-z,.*]+$/.test(value)) {
-          }
-        }}
-      />
+            changeHandler("listOfDrivingAwards", values);
+            setAwards(value);
+            if (/^[A-z A-z,.*]+$/.test(value)) {
+            }
+          }}
+        />
+      </div>
     </div>
   );
 }

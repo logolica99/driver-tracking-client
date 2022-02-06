@@ -195,7 +195,7 @@ const DetailsAboutCrimes = ({ detailName, setDetailsAboutCrimes }) => {
         multiline
         fullWidth
         rows={4}
-        onChange={(e) => {
+        onBlur={(e) => {
           setDetailsAboutCrimes((prevData) => ({
             ...prevData,
             [detailName]: e.target.value,
