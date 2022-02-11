@@ -19,6 +19,7 @@ export default function JobReferences({
       </p>
       <div className="drivingExperience-item-vertical">
         <TextField
+          required
           label="Name"
           onBlur={(e) => {
             var temp = [...jobRefererName];
@@ -27,35 +28,35 @@ export default function JobReferences({
           }}
         />
         <div className="drivingExperience-item-horizontal">
-
-        <TextField
-          label="Address"
-          onBlur={(e) => {
-            var temp = [...jobRefererAddress];
-            temp[0] = e.target.value;
-            setJobRefererAddress(temp);
-          }}
+          <TextField
+            required
+            label="Address"
+            onBlur={(e) => {
+              var temp = [...jobRefererAddress];
+              temp[0] = e.target.value;
+              setJobRefererAddress(temp);
+            }}
           />
-          </div>
-          <div className="drivingExperience-item-horizontal">
-          
-        <MuiPhoneNumber
-          name="phone"
-          label="Phone"
-          data-cy="user-phone"
-          defaultCountry={"us"}
-          value={jobRefererNumber[0]}
-          onBlur={(event) => {
-            const temp = [...jobRefererNumber];
-            temp[0] = event.target.value;
-            setJobRefererNumber(temp);
-          }}
+        </div>
+        <div className="drivingExperience-item-horizontal">
+          <MuiPhoneNumber
+            required
+            name="phone"
+            label="Phone"
+            data-cy="user-phone"
+            defaultCountry={"us"}
+            value={jobRefererNumber[0]}
+            onBlur={(event) => {
+              const temp = [...jobRefererNumber];
+              temp[0] = event.target.value;
+              setJobRefererNumber(temp);
+            }}
           />
-          </div>
+        </div>
       </div>
-      <div  className="drivingExperience-item-vertical">
-        
+      <div className="drivingExperience-item-vertical">
         <TextField
+          required
           label="Name"
           onBlur={(e) => {
             var temp = [...jobRefererName];
@@ -64,34 +65,35 @@ export default function JobReferences({
           }}
         />
         <div className="drivingExperience-item-horizontal">
-          
-        <TextField
-          label="Address"
-          onBlur={(e) => {
-            var temp = [...jobRefererAddress];
-            temp[1] = e.target.value;
-            setJobRefererAddress(temp);
-          }}
+          <TextField
+            required
+            label="Address"
+            onBlur={(e) => {
+              var temp = [...jobRefererAddress];
+              temp[1] = e.target.value;
+              setJobRefererAddress(temp);
+            }}
           />
-          </div>
-          <div className="drivingExperience-item-horizontal">
-          
-        <MuiPhoneNumber
-          name="phone"
-          label="Phone"
-          data-cy="user-phone"
-          defaultCountry={"us"}
-          value={jobRefererNumber[1]}
-          onBlur={(event) => {
-            const temp = [...jobRefererNumber];
-            temp[1] = event.target.value;
-            setJobRefererNumber(temp);
-          }}
+        </div>
+        <div className="drivingExperience-item-horizontal">
+          <MuiPhoneNumber
+            required
+            name="phone"
+            label="Phone"
+            data-cy="user-phone"
+            defaultCountry={"us"}
+            value={jobRefererNumber[1]}
+            onBlur={(event) => {
+              const temp = [...jobRefererNumber];
+              temp[1] = event.target.value;
+              setJobRefererNumber(temp);
+            }}
           />
-          </div>
+        </div>
       </div>
-      <div  className="drivingExperience-item-vertical">
+      <div className="drivingExperience-item-vertical">
         <TextField
+          required
           label="Name"
           onBlur={(e) => {
             var temp = [...jobRefererName];
@@ -100,31 +102,31 @@ export default function JobReferences({
           }}
         />
         <div className="drivingExperience-item-horizontal">
-          
-        <TextField
-          label="Address"
-          onBlur={(e) => {
-            var temp = [...jobRefererAddress];
-            temp[2] = e.target.value;
-            setJobRefererAddress(temp);
-          }}
+          <TextField
+            required
+            label="Address"
+            onBlur={(e) => {
+              var temp = [...jobRefererAddress];
+              temp[2] = e.target.value;
+              setJobRefererAddress(temp);
+            }}
           />
-          </div>
-          <div className="drivingExperience-item-horizontal">
-          
-        <MuiPhoneNumber
-          name="phone"
-          label="Phone"
-          data-cy="user-phone"
-          defaultCountry={"us"}
-          value={jobRefererNumber[2]}
-          onBlur={(event) => {
-            const temp = [...jobRefererNumber];
-            temp[2] = event.target.value;
-            setJobRefererNumber(temp);
-          }}
+        </div>
+        <div className="drivingExperience-item-horizontal">
+          <MuiPhoneNumber
+            required
+            name="phone"
+            label="Phone"
+            data-cy="user-phone"
+            defaultCountry={"us"}
+            value={jobRefererNumber[2]}
+            onBlur={(event) => {
+              const temp = [...jobRefererNumber];
+              temp[2] = event.target.value;
+              setJobRefererNumber(temp);
+            }}
           />
-          </div>
+        </div>
       </div>
     </div>
   );

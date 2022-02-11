@@ -54,7 +54,7 @@ export default function DriverExperienceCheckboxes() {
           Have you ever been denied a license, permit or privilege to operate a
           motor vehicle?
         </p>
-        <FormControl component="fieldset">
+        <FormControl component="fieldset" required>
           <RadioGroup
             name="radio-buttons-group"
             defaultValue={false}
@@ -94,7 +94,7 @@ export default function DriverExperienceCheckboxes() {
         <p>
           Has any license, permit or privilege ever been suspended or revoked?
         </p>
-        <FormControl component="fieldset">
+        <FormControl component="fieldset" required>
           <RadioGroup
             name="radio-buttons-group"
             defaultValue={false}
@@ -154,7 +154,7 @@ export default function DriverExperienceCheckboxes() {
       </div>
       <div>
         <p>Have you ever been convicted of a felony?</p>
-        <FormControl component="fieldset">
+        <FormControl component="fieldset" required>
           <RadioGroup
             name="radio-buttons-group"
             defaultValue={false}

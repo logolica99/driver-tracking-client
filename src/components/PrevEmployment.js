@@ -95,7 +95,7 @@ const PrevEmployment = ({
                 temp[index] = newValue.getTime();
                 setPrevEmploymentFrom(temp);
               }}
-              renderInput={(params) => <TextField {...params} />}
+              renderInput={(params) => <TextField  {...params} />}
             />
           </LocalizationProvider>
           <div className="employmentHistory-item-horizontal">
@@ -186,7 +186,7 @@ const PrevEmployment = ({
         />
       </div>
       <div className="employmentHistory-item">
-        <FormControl component="fieldset" required>
+        <FormControl component="fieldset" >
           <FormLabel component="legend">
             Were you subject to the FMCSRs while employed here?
           </FormLabel>
@@ -207,7 +207,7 @@ const PrevEmployment = ({
         </FormControl>
       </div>
       <div className="employmentHistory-item">
-        <FormControl component="fieldset" required>
+        <FormControl component="fieldset" >
           <FormLabel component="legend">
             Was your job designated as a safety-sensitive function in any DOT-
             regulated mode subject to the drug and alcohol testing requirements

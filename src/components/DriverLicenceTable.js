@@ -156,6 +156,7 @@ export default function DriverLicenceTable() {
               <TableRow key={index}>
                 <TableCell>
                   <TextField
+                  required
                     label="State"
                     onBlur={(event) => {
                       var temp = [...states];
@@ -166,6 +167,7 @@ export default function DriverLicenceTable() {
                 </TableCell>
                 <TableCell>
                   <TextField
+                  required
                     label="License"
                     onBlur={(e) => {
                       var temp = [...licences];
@@ -176,6 +178,7 @@ export default function DriverLicenceTable() {
                 </TableCell>
                 <TableCell>
                   <TextField
+                  required
                     label="Type"
                     onBlur={(e) => {
                       var temp = [...types];
@@ -186,6 +189,7 @@ export default function DriverLicenceTable() {
                 </TableCell>
                 <TableCell>
                   <TextField
+                  required
                     label="Endorsements"
                     onBlur={(e) => {
                       var temp = [...endorsements];
@@ -211,6 +215,7 @@ export default function DriverLicenceTable() {
                 </TableCell>
                 <TableCell>
                   <input
+                    required
                     accept="image/*"
                     id="file-upload"
                     single="true"

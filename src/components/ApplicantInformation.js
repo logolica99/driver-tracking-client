@@ -217,6 +217,7 @@ export default function ApllicantInformation() {
 
           id="outlined-required"
           label="NAME"
+          required
           onChange={(event) => {
             setApplicantName(event.target.value);
           }}
@@ -243,8 +244,9 @@ export default function ApllicantInformation() {
         />
       </div>
       <div className="applicantInfo-item">
-        <LocalizationProvider dateAdapter={AdapterDateFns}>
+        <LocalizationProvider dateAdapter={AdapterDateFns} required>
           <DesktopDatePicker
+            required
             label="BIRTH DATE"
             value={birthDate}
             maxDate={new Date()}
@@ -409,11 +411,11 @@ export default function ApllicantInformation() {
           </div>
         ) : null}
       </div>
-      
-        <div className="applicantInfo-title">
-          <h2>EDUCATION HISTORY </h2>
-        </div>
-  
+
+      <div className="applicantInfo-title">
+        <h2>EDUCATION HISTORY </h2>
+      </div>
+
       <div className="applicantInfo-item">
         <p> Please circle the highest grade completed:</p>
         <FormControl component="fieldset" required>

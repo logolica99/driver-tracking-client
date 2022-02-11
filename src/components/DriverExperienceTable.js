@@ -140,7 +140,9 @@ export default function DriverExperienceTable() {
 
                 <TableCell align="center">
                   <TextField
+                    required
                     type="number"
+                    label="Miles"
                     onBlur={(event) => {
                       setDates((prevData) => ({
                         ...prevData,
@@ -163,7 +165,9 @@ export default function DriverExperienceTable() {
           (Cailfornia,Alabama,New Jersey)):
         </p>
         <TextField
+          required
           fullWidth
+          label = "Cailfornia,Alabama,New Jersey"
           onBlur={({ target: { value } }) => {
             var values = value.split(",").map(function (item) {
               return item.trim();
@@ -179,7 +183,9 @@ export default function DriverExperienceTable() {
       <div className="drivingExperience-item">
         <p>List special courses/training completed (PTD/DDC, HAZMAT, ETC):</p>
         <TextField
+          
           fullWidth
+          label="PTD/DDC, HAZMAT, ETC"
           onBlur={({ target: { value } }) => {
             var values = value.split(",").map(function (item) {
               return item.trim();
@@ -199,6 +205,7 @@ export default function DriverExperienceTable() {
         </p>
         <TextField
           fullWidth
+          
           onBlur={({ target: { value } }) => {
             var values = value.split(",").map(function (item) {
               return item.trim();

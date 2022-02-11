@@ -29,7 +29,7 @@ import { getDatabase, ref, set } from "firebase/database";
 function App() {
   //context initializing
 
-  const [AuthState,authDispatch] = useContext(AuthContext);
+  const [AuthState, authDispatch] = useContext(AuthContext);
   const [DriverExperienceState] = useContext(DriverExperienceContext);
   const [PreviousEmploymentState] = useContext(PrevEmploymentContext);
   const [ApplicantInfoState] = useContext(ApplicantInformationContext);
@@ -38,12 +38,13 @@ function App() {
 
   //states
 
-  const [jobRefererName, setJobRefererName] = useState([]);
-  const [jobRefererAddress, setJobRefererAddress] = useState([]);
-  const [jobRefererNumber, setJobRefererNumber] = useState([]);
+  const [jobRefererName, setJobRefererName] = useState([""]);
+  const [jobRefererAddress, setJobRefererAddress] = useState([""]);
+  const [jobRefererNumber, setJobRefererNumber] = useState([""]);
 
   ///data uploading to firebase database
-  const writeUserData = async () => {
+  const writeUserData = async (e) => {
+    e.preventDefault();
     authDispatch({
       type: "UPDATE_LOADING",
       payload: {
@@ -66,18 +67,17 @@ function App() {
 
         jobRefererNumber: jobRefererNumber,
       },
-    }).then(()=>{
+    }).then(() => {
       authDispatch({
         type: "UPDATE_LOADING",
         payload: {
           loading: false,
         },
-      })
+      });
       authDispatch({
         type: "REMOVE_USER",
-       
-      })
-    })
+      });
+    });
   };
 
   //util functions
@@ -99,30 +99,33 @@ function App() {
         {AuthState.doesExist ? (
           <AuthPage />
         ) : (
-          <div className="body">
-            <ApplicantInformation />
+          <form onSubmit={writeUserData}>
+            <div className="body">
+              <ApplicantInformation />
 
-            <EmploymentHistory />
-            <DriverExperience />
-            <JobReferences
-              jobRefererName={jobRefererName}
-              setJobRefererName={setJobRefererName}
-              jobRefererAddress={jobRefererAddress}
-              setJobRefererAddress={setJobRefererAddress}
-              jobRefererNumber={jobRefererNumber}
-              setJobRefererNumber={setJobRefererNumber}
-            />
-            <div className="submitButton">
-              <Button
-                size="large"
-                onClick={writeUserData}
-                variant="contained"
-                color="success"
-              >
-                Submit
-              </Button>
+              <EmploymentHistory />
+              <DriverExperience />
+              <JobReferences
+                jobRefererName={jobRefererName}
+                setJobRefererName={setJobRefererName}
+                jobRefererAddress={jobRefererAddress}
+                setJobRefererAddress={setJobRefererAddress}
+                jobRefererNumber={jobRefererNumber}
+                setJobRefererNumber={setJobRefererNumber}
+              />
+              <div className="submitButton">
+                <Button
+                  size="large"
+                  // onClick={writeUserData}
+                  variant="contained"
+                  type="submit"
+                  color="success"
+                >
+                  Submit
+                </Button>
+              </div>
             </div>
-          </div>
+          </form>
         )}
       </div>
     </div>
