@@ -7,14 +7,16 @@ import { AuthContextProvider } from "./context/AuthContext";
 import { ApplicantInformationContextProvider } from "./context/ApplicantInformationContext";
 import { DriverExperienceContextProvider } from "./context/DriverExperienceContext";
 import { PrevEmploymentContextProvider } from "./context/PrevEmploymentContext";
-
+import { VehicleIntventoryContextProvider } from "./context/VehicleInventoryContext";
 ReactDOM.render(
   <React.StrictMode>
     <AuthContextProvider>
       <ApplicantInformationContextProvider>
         <PrevEmploymentContextProvider>
           <DriverExperienceContextProvider>
-            <App />
+            <VehicleIntventoryContextProvider>
+              <App />
+            </VehicleIntventoryContextProvider>
           </DriverExperienceContextProvider>
         </PrevEmploymentContextProvider>
       </ApplicantInformationContextProvider>

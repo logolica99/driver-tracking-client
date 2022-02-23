@@ -13,6 +13,7 @@ import ApplicantInformation from "./components/ApplicantInformation";
 import EmploymentHistory from "./components/EmploymentHistory";
 
 import DriverExperience from "./components/DriverExperience";
+import VehicleInventory from "./components/VehicleInventory";
 import JobReferences from "./components/JobReferences";
 
 //contexts import
@@ -20,7 +21,7 @@ import { AuthContext } from "./context/AuthContext";
 import { DriverExperienceContext } from "./context/DriverExperienceContext";
 import { PrevEmploymentContext } from "./context/PrevEmploymentContext";
 import { ApplicantInformationContext } from "./context/ApplicantInformationContext";
-
+import { VehicleIntventoryContext } from "./context/VehicleInventoryContext";
 //firebase import
 
 // import { getStorage, uploadBytes, ref } from "firebase/storage";
@@ -33,7 +34,7 @@ function App() {
   const [DriverExperienceState] = useContext(DriverExperienceContext);
   const [PreviousEmploymentState] = useContext(PrevEmploymentContext);
   const [ApplicantInfoState] = useContext(ApplicantInformationContext);
-
+  const [VehicleInventoryState] = useContext(VehicleIntventoryContext)
   //// firebase storage image reference
 
   //states
@@ -67,6 +68,8 @@ function App() {
 
         jobRefererNumber: jobRefererNumber,
       },
+      vehicleInventory:VehicleInventoryState
+
     }).then(() => {
       authDispatch({
         type: "UPDATE_LOADING",
@@ -105,6 +108,7 @@ function App() {
 
               <EmploymentHistory />
               <DriverExperience />
+              <VehicleInventory/>
               <JobReferences
                 jobRefererName={jobRefererName}
                 setJobRefererName={setJobRefererName}

@@ -36,15 +36,15 @@ export default function ApllicantInformation() {
     setMobileNumber(authState.phoneNumber);
   });
   const [age, setAge] = useState("");
-  const [birthDate, setBirthDate] = useState(new Date().getTime());
+  const [birthDate, setBirthDate] = useState("");
+  const [email, setEmail] = useState("");
   const [ss, setSS] = useState("");
 
   const [physicalExamCertificate, setPhysicalExamCertificate] = useState();
   const [physicalExamCertificateURL, setPhysicalExamCertificateURL] =
     useState("");
-  const [physicalExamExpirationDate, setPhysicalExamExpirationDate] = useState(
-    new Date().getTime()
-  );
+  const [physicalExamExpirationDate, setPhysicalExamExpirationDate] =
+    useState("");
 
   const [livingAddressAmount, setLivingAddressAmount] = useState([0]);
   const [livingAddresses, setLivingAddresses] = useState([]);
@@ -94,17 +94,17 @@ export default function ApllicantInformation() {
       );
       uploadBytes(imageRef, physicalExamCertificate).then((res) => {
         console.log("filed uploaded successfully");
+        getDownloadURL(
+          ref(storage, `${authState.phoneNumber}/physicalExamCertificate.jpg`)
+        ).then((url) => {
+          setPhysicalExamCertificateURL(url);
+        });
         authDispatch({
           type: "UPDATE_LOADING",
           payload: {
             loading: false,
           },
         });
-      });
-      getDownloadURL(
-        ref(storage, `${authState.phoneNumber}/physicalExamCertificate.jpg`)
-      ).then((url) => {
-        setPhysicalExamCertificateURL(url);
       });
     }
   }, [physicalExamCertificate]);
@@ -118,6 +118,12 @@ export default function ApllicantInformation() {
   useEffect(() => {
     changeHandler("jobPosition", jobPosition);
   }, [jobPosition]);
+  useEffect(() => {
+    changeHandler("email", email);
+  }, [email]);
+  useEffect(() => {
+    changeHandler("email", email);
+  }, [email]);
   useEffect(() => {
     changeHandler("applicantName", applicantName);
   }, [applicantName]);
@@ -218,8 +224,21 @@ export default function ApllicantInformation() {
           id="outlined-required"
           label="NAME"
           required
-          onChange={(event) => {
+          onBlur={(event) => {
             setApplicantName(event.target.value);
+          }}
+        />
+      </div>
+      <div className="applicantInfo-item">
+        <TextField
+          // inputRef={element => inputRef.current[0]=element}
+          //  inputRef={inputRef}
+
+          id="outlined-required"
+          label="Email"
+          required
+          onBlur={(event) => {
+            setEmail(event.target.value);
           }}
         />
       </div>
@@ -253,7 +272,7 @@ export default function ApllicantInformation() {
             onChange={(newValue) => {
               setBirthDate(newValue.getTime());
             }}
-            renderInput={(params) => <TextField {...params} />}
+            renderInput={(params) => <TextField required {...params} />}
           />
         </LocalizationProvider>
       </div>
@@ -262,7 +281,7 @@ export default function ApllicantInformation() {
           required
           id="outlined-required"
           label="SS#"
-          onChange={(event) => {
+          onBlur={(event) => {
             setSS(event.target.value);
           }}
         />
@@ -270,6 +289,7 @@ export default function ApllicantInformation() {
       <div className="applicantInfo-item">
         <p>Upload your Physical Exam Certificate:</p>
         <input
+          required
           accept="image/*"
           id="file-upload"
           single="true"
@@ -286,7 +306,7 @@ export default function ApllicantInformation() {
           onChange={(newValue) => {
             setPhysicalExamExpirationDate(newValue.getTime());
           }}
-          renderInput={(params) => <TextField {...params} />}
+          renderInput={(params) => <TextField required {...params} />}
         />
       </LocalizationProvider>
 
