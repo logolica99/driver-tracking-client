@@ -1,5 +1,6 @@
 import React from "react";
 import ReactDOM from "react-dom";
+import { BrowserRouter } from "react-router-dom";
 import "./index.css";
 import App from "./App";
 import reportWebVitals from "./reportWebVitals";
@@ -9,7 +10,7 @@ import { DriverExperienceContextProvider } from "./context/DriverExperienceConte
 import { PrevEmploymentContextProvider } from "./context/PrevEmploymentContext";
 import { VehicleIntventoryContextProvider } from "./context/VehicleInventoryContext";
 ReactDOM.render(
-  <React.StrictMode>
+  <BrowserRouter basename="/apps/form">
     <AuthContextProvider>
       <ApplicantInformationContextProvider>
         <PrevEmploymentContextProvider>
@@ -21,7 +22,7 @@ ReactDOM.render(
         </PrevEmploymentContextProvider>
       </ApplicantInformationContextProvider>
     </AuthContextProvider>
-  </React.StrictMode>,
+  </BrowserRouter>,
   document.getElementById("root")
 );
 
